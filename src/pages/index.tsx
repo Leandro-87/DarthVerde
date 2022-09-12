@@ -8,7 +8,7 @@ export default function Home(){
 
   const {usuario} = useAuth()
 
-
+  /* Foi saporra? */
 
   return (
     <Layout title='Darth Verde é Palmeiras!'>
