@@ -1,0 +1,4 @@
+.a {height: 40px; background: rgba(255, 255, 255, 1); display: flex; align-items: center; justify-content: center; border-radius: 2px; padding: 0 .5em; box-shadow: 0 2px 4px rgba(0,0,0,.4); color: #016001; transition: all 0.1s;}
+.a:hover {transform: scale(1.05);}
+.a svg {height: 1.5em;}
+.a span {font-size: 0.8em; text-transform: uppercase;}
