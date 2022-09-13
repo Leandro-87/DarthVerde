@@ -3,12 +3,33 @@ import PostBox from '../component/template/PostBox'
 import Postar from '../component/template/Postar'
 
 import useAuth from "../component/data/hook/useAuth"
+import firebase from '../services/firebaseConnection'
+
+import { useEffect, useState } from "react"
 
 export default function Home(){
 
   const {usuario} = useAuth()
+  const [posts, setPosts] = useState([])
 
-  /* Foi saporra? */
+    useEffect(() => {
+        firebase.firestore().collection('posts').orderBy('created', 'desc').onSnapshot((snapshot)=>{
+            let lista = [];
+            console.log(snapshot);
+            snapshot.forEach((doc)=>{
+                lista.push({
+                    id: doc.id,
+                    created: doc.data().created,
+                    createdFormated: new Date().toLocaleDateString('pt-BR'),
+                    titulo: doc.data().titulo,
+                    mensagem: doc.data().mensagem,
+                    userId: doc.data().userId,
+                    userName: doc.data().userName
+                })
+            })
+            setPosts(lista)
+        })
+    },[])
 
   return (
     <Layout title='Darth Verde é Palmeiras!'>
@@ -16,10 +37,12 @@ export default function Home(){
     <Postar/>
 
       
+        {posts.map((post, index)=>{
+            return(
+                <PostBox mid key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
+            )
+        })}
 
-      <PostBox mid tituloMensagem='Titulo' mensagem='Tem que puxar esse texto para a pagina de post' url="/post/Titulo"/>
-      <PostBox big tituloMensagem='Titulo 2' mensagem='Alguma mensagem curta' url="/post/Titulo 2"/>
-      <PostBox tituloMensagem='Titulo 3' mensagem='Alguma mensagem grande para o texto ficar pequeno, os outros foram grande e medio' url="/post/Titulo 3"/>
     </Layout>
   )
 }

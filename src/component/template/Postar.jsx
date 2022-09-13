@@ -33,7 +33,8 @@ export default function Postar(props){
             return;
         } 
         
-        await firebase.firestore().collection('posts')
+        
+        const doc = await firebase.firestore().collection('posts')
         .add({
             created: new Date(),
             titulo: tituloInput,
@@ -42,32 +43,42 @@ export default function Postar(props){
             userName: usuario.nome,
             userId: usuario.uid
         })
-        .then((doc)=>{
-            console.log('CADASTRAAAAAAADOOOO');
-            let data = {
-                id: doc.id,
-                created: new Date(),
-                createdFormated: format(new Date(), 'dd MMMM yyyy'),
-                titulo: tituloInput,
-                mensagem: input,
-                userId: usuario.uid,
-                userName: usuario.nome
-            };
-
+        console.log('CADASTRAAAAAAADOOOO');
+        let data = {
+            id: doc.id,
+            created: new Date(),
+            createdFormated: new Date().toLocaleDateString('pt-BR'),
+            titulo: tituloInput,
+            mensagem: input,
+            userId: usuario.uid,
+            userName: usuario.nome
+        };
         setTimeline([...timeline, data]);
         setInput('')
         setTituloInput('')
 
+        // Ta chamando duas vezes, voce vai ver quando cadastrar um post, o correto é voce passar o CSS do index pra cá e manter tudo aqui
+        firebase.firestore().collection('posts').orderBy('created', 'desc').onSnapshot((snapshot)=>{
+            let lista = [];
+            console.log(snapshot);
+            snapshot.forEach((doc)=>{
+                lista.push({
+                    id: doc.id,
+                    created: doc.data().created,
+                    createdFormated: new Date().toLocaleDateString('pt-BR'),
+                    titulo: doc.data().titulo,
+                    mensagem: doc.data().mensagem,
+                    userId: doc.data().userId,
+                    userName: doc.data().userName
+                })
+            })
+            setTimeline(lista)
         })
-        .catch((err)=>{
-            console.log('Deu algum b.o', err)
-        })
-        
     }
 
         /*   -------------------------------AQUI ERA PRA FUNCIONAR O FEED COM TODAS AS MENSAGENS ENVIADAS MAS NAO VAI ----------------------------------- */ 
 
-        const feed = firebase.firestore().collection('posts').orderBy('created', 'asc' ).get(); 
+        // const feed = firebase.firestore().collection('posts').orderBy('created', 'asc' ).get(); 
         
         /*
 
@@ -106,15 +117,15 @@ export default function Postar(props){
                     </form>
                 </div>
             </div>
-            {/*
+            
             
                 {timeline.map( post => (
-                    <Link href={`post/${post.id}`}>
+                    <Link href={`post/${post.id}`} key={post.id}>
                         <h1>{post.mensagem}</h1>
                     </Link>
                 ))}
             
-               */}
+              
         </>
     )
 }
