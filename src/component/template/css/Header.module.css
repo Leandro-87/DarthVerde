@@ -1,4 +1,4 @@
 .header {display: flex; width: 100vw; height: 75px; background: rgb(8,144,85); justify-content: space-between; align-items: center; padding: 0 20px;
-    background: linear-gradient(90deg, rgba(8,144,85,1) 0%, rgba(3,67,48,1) 100%);}
+    background: linear-gradient(90deg, rgba(8,144,85,1) 0%, rgba(3,67,48,1) 100%); position: fixed; z-index: 100;}
 .header ul {display: flex;}
 .header ul li { margin: 0 .5em;}

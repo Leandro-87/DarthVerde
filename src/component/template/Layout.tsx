@@ -1,4 +1,4 @@
-import Aside from './Aside'
+import Aside from './aside'
 import Conteudo from './Conteudo'
 import Header from './Header'
 import Titulo from "./Titulo"
@@ -21,9 +21,9 @@ export default function Layout(props){
                         {props.children}
                     </Conteudo>
                 </div>
-                <aside className={style.aside}>
+               
                     <Aside />
-                </aside>
+                
             </div>
         </>
     )

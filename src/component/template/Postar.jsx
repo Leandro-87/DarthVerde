@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import firebase from '../../services/firebaseConnection'
 import useAuth from '../data/hook/useAuth'
-import {format} from 'date-fns'
+import { IconPlus } from '../icons'
 
 //import enviaPost from '../data/hook/enviaPost'
 
@@ -43,7 +43,6 @@ export default function Postar(props){
             userName: usuario.nome,
             userId: usuario.uid
         })
-        console.log('CADASTRAAAAAAADOOOO');
         let data = {
             id: doc.id,
             created: new Date(),
@@ -60,7 +59,6 @@ export default function Postar(props){
         // Ta chamando duas vezes, voce vai ver quando cadastrar um post, o correto é voce passar o CSS do index pra cá e manter tudo aqui
         firebase.firestore().collection('posts').orderBy('created', 'desc').onSnapshot((snapshot)=>{
             let lista = [];
-            console.log(snapshot);
             snapshot.forEach((doc)=>{
                 lista.push({
                     id: doc.id,
@@ -97,11 +95,12 @@ export default function Postar(props){
         
     return (
         <>
+            { usuario ? (
             <div className={style.card}>
                 
-                <div>
+                <div className='flexCentro'>
                     <span>Deixe seu comentário</span>
-                    <button id='mostraAreaPostar' onClick={mostraTextarea} className={style.add}>+</button>
+                    <button id='mostraAreaPostar' onClick={mostraTextarea} className={style.add}>{IconPlus}</button>
                 </div>
                 <div id='areaPostar' className={style.formPost} style={{display:'none'}}>
                     <form id='enviaPost' onSubmit={addPost}>
@@ -117,13 +116,16 @@ export default function Postar(props){
                     </form>
                 </div>
             </div>
+            ) : 
+            <h3 className={style.deveLogar} >Você deve logar para enviar alguma mensagem</h3>
+            }
             
             
-                {timeline.map( post => (
+                {/*timeline.map( post => (
                     <Link href={`post/${post.id}`} key={post.id}>
                         <h1>{post.mensagem}</h1>
                     </Link>
-                ))}
+                ))*/}
             
               
         </>

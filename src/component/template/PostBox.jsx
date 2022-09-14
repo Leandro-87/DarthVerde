@@ -8,13 +8,13 @@ export default function PostBox(props){
     const router = useRouter()
     const pathname = router.pathname
 
-    function cardPost(x){
+    function cardPost(tamanhoFont){
         return (
             <Link href={props.url ?? ''}>
                
                     <article className={style.card}>
                         <h1>{props.tituloMensagem}</h1>
-                        <p className='post' style={{fontSize: x }}>{props.mensagem}</p>
+                        <p className='post' style={{fontSize: tamanhoFont }}>{props.mensagem}</p>
                         <Comentario/>
                         {pathname == '/post/[postagem]' ? (
                             <div className='flexDireita'>

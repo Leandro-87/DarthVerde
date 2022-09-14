@@ -1,8 +1,9 @@
-.card {display: flex; align-items: flex-end; flex-direction: column; margin: 2rem; padding: 1rem 2rem; border-radius: 2px; box-shadow: 0px 5px 12px rgb(0 0 0 / 10%);}
-.add {border-radius: 50%; border: 0; background-color: #e9e9e9; width: 2em; height: 2em; font-size: 1.2em; margin-left: 10px;}
+.card {display: flex; align-items: flex-end; flex-direction: column; margin: 0 2rem; padding: 1rem 2rem; border-radius: 2px; box-shadow: 0px 5px 12px rgb(0 0 0 / 10%);}
+.add {border-radius: 50%; border: 0; width: 2em; font-size: 1rem; margin-left: 10px;}
 .card span {color: grey;}
 .formPost {width: 100%; display: flex; flex-direction: column; align-items: flex-end;}
 .formPost textarea { height: 100px; margin: 1.5rem 0; font-size: 1.85em; }
 .formPost input { margin-top: 1em; font-size: 1.25em; }
 .formPost textarea:focus-visible { border-color: green;}
 .inputArea {width: 100%; max-width: 100%; border: 1px solid #cdcdcd; padding: .3em;  background-color: rgba(0,0,0,0.015); box-shadow: 0px 5px 7px rgb(0 0 0 / 5%); border-radius: 4px; font-family: 'Times New Roman', Times, serif;}
+.deveLogar{padding: 0 2rem 1rem; text-align: center; opacity: .3; font-weight: bold;}

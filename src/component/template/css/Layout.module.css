@@ -1,3 +1,2 @@
-.container {width: 60vw; margin: 0 auto; padding: 1rem 0; display: flex; flex-grow: 4;}
-.main {width: 70%;}
-.aside {width: 30%; display: flex; justify-content: center;}
+.container {width: 60vw; margin: 0 auto; padding: 120px 0 1rem; display: flex; flex-grow: 4;}
+.main {width: 70%; }
