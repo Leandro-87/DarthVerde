@@ -15,7 +15,7 @@ export default function Home(){
     useEffect(() => {
         firebase.firestore().collection('posts').orderBy('created', 'desc').onSnapshot((snapshot)=>{
             let lista = [];
-            console.log(snapshot);
+            //console.log(snapshot);
             snapshot.forEach((doc)=>{
                 lista.push({
                     id: doc.id,
@@ -24,7 +24,8 @@ export default function Home(){
                     titulo: doc.data().titulo,
                     mensagem: doc.data().mensagem,
                     userId: doc.data().userId,
-                    userName: doc.data().userName
+                    userName: doc.data().userName,
+                    userImg: doc.data().userImg
                 })
             })
             setPosts(lista)
@@ -39,7 +40,8 @@ export default function Home(){
       
         {posts.map((post, index)=>{
             return(
-                <PostBox mid key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
+                <PostBox userImage={post.userImg} userName={post.userName} mid key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
+
             )
         })}
 

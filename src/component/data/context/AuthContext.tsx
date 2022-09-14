@@ -53,8 +53,8 @@ export function AuthProvider(props){
             setCarregando(false)
           
              
-            document.getElementById('hideNotLogin').style.display = 'flex'
-            document.getElementById('btnLogin').style.display = 'none'
+            //document.getElementById('hideNotLogin').style.display = 'flex'
+            //document.getElementById('btnLogin').style.display = 'none'
              
             
 

@@ -3,7 +3,7 @@
 .show{display: flex;}
 .button{background:linear-gradient(90deg, rgba(8,144,85,1) 0%, rgba(3,67,48,1) 100%); padding: 0.25em 0.75em; color: #FFF; border-radius: 10rem; box-shadow: 0px 2px 6px rgb(0 0 0 / 30%);}
 .flex{display: flex;}
-.flexDireita{display: flex; justify-content: flex-end;}
+.flexDireita{display: flex; justify-content: flex-end; align-items: center;}
 .flexCentro{display: flex; justify-content: center; align-items: center;}
 .mt1{margin-top: 0.25rem;}.mt2{margin-top: 0.5rem;}.mt3{margin-top: 0.75rem;}.mt4{margin-top: 1rem;}
 .mr1{margin-right: 0.25rem;}.mr2{margin-right: 0.5rem;}.mr3{margin-right: 0.75rem;}.mr4{margin-right: 1rem;}

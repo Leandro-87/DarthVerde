@@ -23,10 +23,8 @@ export default function Autenticacao( props: autenticacaoProps) {
 
   function submeter(){
     if(modo === 'login'){
-      console.log('Login')
       exibirErro('Algo deu errado!')
     } else {
-      console.log('Cadastro')
       exibirErro('Algo deu errado em seu cadastro!')
     }
   }

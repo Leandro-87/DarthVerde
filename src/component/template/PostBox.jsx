@@ -13,18 +13,24 @@ export default function PostBox(props){
             <Link href={props.url ?? ''}>
                
                     <article className={style.card}>
-                        <h1>{props.tituloMensagem}</h1>
-                        <p className='post' style={{fontSize: tamanhoFont }}>{props.mensagem}</p>
-                        <Comentario/>
-                        {pathname == '/post/[postagem]' ? (
-                            <div className='flexDireita'>
-                                <button className='button'>Comentar</button>
+                        <header>
+                            <img src={props.userImage}/>
+                            <span>{props.userName}</span>
+                        </header>
+                        <div>
+                            <h1>{props.tituloMensagem}</h1>
+                            <p className='post' style={{fontSize: tamanhoFont }}>{props.mensagem}</p>
+                            <Comentario/>
+                            {pathname == '/post/[postagem]' ? (
+                                <div className='flexDireita'>
+                                    <button className='button'>Comentar</button>
+                                </div>
+                            ) : 
+                            <div className='flexDireita mt2'>
+                                <small>206 comentários</small>
                             </div>
-                        ) : 
-                        <div className='flexDireita mt2'>
-                            <small>206 comentários</small>
+                            }
                         </div>
-                        }
                     </article>
             </Link>
             )
@@ -33,7 +39,7 @@ export default function PostBox(props){
 
     if(props.big){
         return cardPost(30)
-    } if (props.mid){
+    } else if (props.mid){
         return cardPost(22)
     }  else {
         return cardPost()

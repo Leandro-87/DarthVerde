@@ -7,7 +7,8 @@ import Head from 'next/head'
 
 
 export default function Layout(props){
-    return (
+
+     return (
         <>
             <Head>
                 <title>{props.title}</title>

@@ -5,9 +5,25 @@ import Logo from "./Logo"
 import Autenticacao from "../../pages/autenticacao"
 import AvatarUsuario from "./AvatarUsuario"
 import useAuth from "../data/hook/useAuth"
+import { useEffect } from "react"
 
 
 export default function Header(props){
+
+    const {usuario} = useAuth()
+
+    useEffect(() => {
+        if(usuario){
+            
+            document.getElementById('btnLogin').style.display = 'none'
+            document.getElementById('hideNotLogin').style.display = 'flex'
+            
+        } else {
+            document.getElementById('btnLogin').style.display = 'flex'
+            document.getElementById('hideNotLogin').style.display = 'none'
+
+        }
+    }, [usuario])
 
     const { logout } = useAuth()
 
@@ -18,7 +34,7 @@ export default function Header(props){
             <ul>
                 <MenuItem url='/' texto='Home' icone={IconHome} />
                 <Autenticacao icone={IconLogin} />
-                <span id="hideNotLogin" className="hide">
+                <span id="hideNotLogin">
                     <AvatarUsuario/>
                     <MenuItem 
                         url="/" 
