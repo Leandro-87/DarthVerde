@@ -1,14 +1,19 @@
-import router from 'next/router'
-
 export default function Button(props){
-
    
     return(
         <>
             <button 
-                onClick={() => router.push(props.rota)}
-                style={{padding: 10, border: 0, backgroundColor: '#FFF', color: '#034631', borderRadius: 2, fontWeight: 'bold', margin: 10}}>
-                {props.value}
+                type={props.type}
+                onClick={props.onClick}
+                id={props.id}
+                className={props.className}
+                style={{padding: 10, backgroundColor: props.bg || '#034631', color: props.color || '#FFF', borderRadius: 2, margin: props.margin || 10 }}
+            >
+                <div className='flexCentro'>
+                    <div style={{height: 22, width: 22, marginRight: 5}}>{props.icone}</div>
+                    {props.value}
+
+                </div>
             </button>
         </>
     )

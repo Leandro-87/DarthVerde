@@ -4,7 +4,8 @@ import Link from 'next/link'
 
 import firebase from '../../services/firebaseConnection'
 import useAuth from '../data/hook/useAuth'
-import { IconPlus } from '../icons'
+import { IconPlus, IconPostar } from '../icons'
+import Button from './Button'
 
 //import enviaPost from '../data/hook/enviaPost'
 
@@ -112,12 +113,16 @@ export default function Postar(props){
                             value={input} 
                             onChange={(e) => setInput(e.target.value)}
                         />
-                        <button type='submit' id='submitPost' /*onClick={btnEnviaPost}*/>Postar</button>
+                        <div style={{display:'flex', justifyContent: 'flex-end'}}>
+                            <Button value='Postar' type='submit' id='submitPost' margin='0' icone={IconPostar} />
+                        </div>
+                        {/*<button type='submit' id='submitPost' /*onClick={btnEnviaPost} //\\ >Postar</button> */}
+                        
                     </form>
                 </div>
             </div>
             ) : 
-            <h3 className={style.deveLogar} >Você deve logar para enviar alguma mensagem</h3>
+            <h3 className={style.deveLogar}>Você deve logar para enviar alguma mensagem</h3>
             }
             
             

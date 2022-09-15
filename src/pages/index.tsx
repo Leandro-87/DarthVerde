@@ -40,7 +40,7 @@ export default function Home(){
       
         {posts.map((post, index)=>{
             return(
-                <PostBox userImage={post.userImg} userName={post.userName} mid key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
+                <PostBox mid userImage={post.userImg} userName={post.userName} key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
 
             )
         })}
