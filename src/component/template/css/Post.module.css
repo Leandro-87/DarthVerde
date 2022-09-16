@@ -1,5 +1,7 @@
 .card {margin: 2rem; background-color: #FFF; border-radius: 6px; box-shadow: 0px 5px 12px rgb(0 0 0 / 10%); cursor: pointer; overflow: hidden;}
 .card header {display: flex; flex-wrap: wrap; align-items: center; background: linear-gradient(0deg, rgba(8,144,85,1) 0%, rgba(3,67,48,1) 100%); padding: .7em 1.5em; gap:.7em}
-.card header span {color: #FFF;}
+.card header span {color: #FFF; flex-grow: 1;}
 .card header img {width: 36px; border-radius: 25px; }
-.card div {padding: .8em 1.5em; }
+.card header p {color: #FFF; font-size: .72em; font-weight: bold; }
+.areaMensagem {padding: .8em 1.5em; }
+.avanti {font-size: .7em; font-weight: bold;}

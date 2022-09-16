@@ -2,37 +2,49 @@ import style from './css/Post.module.css'
 import Link from 'next/link'
 import Comentario from './Comentario'
 import { useRouter } from 'next/router'
+import { IconLike } from '../icons'
+import Button from './Button'
+import { useState } from 'react'
 
 export default function PostBox(props){
 
     const router = useRouter()
     const pathname = router.pathname
 
+    const [avanti, setAvanti] = useState('0')
+
+    function botaoAvanti(){
+        setAvanti(+1)
+       
+    }
+
     function cardPost(tamanhoFont){
         return (
-            <Link href={props.url ?? ''}>
+            
                
                     <article className={style.card}>
                         <header>
                             <img src={props.userImage}/>
                             <span>{props.userName}</span>
+                            <p>{avanti} AVANTI</p>
                         </header>
-                        <div>
-                            <h1>{props.tituloMensagem}</h1>
-                            <p className='post' style={{fontSize: tamanhoFont }}>{props.mensagem}</p>
-                            <Comentario/>
-                            {pathname == '/post/[postagem]' ? (
-                                <div className='flexDireita'>
-                                    <button className='button'>Comentar</button>
-                                </div>
-                            ) : 
-                            <div className='flexDireita mt2'>
-                                <small>206 comentários</small>
+                        <Link href={props.url ?? ''}>
+                            <div className={style.areaMensagem}>
+                                <h1>{props.tituloMensagem}</h1>
+                                <p className='post' style={{fontSize: tamanhoFont }}>{props.mensagem}</p>
+                                <Comentario/>
+                                {pathname == '/post/[postagem]' ? (
+                                    <div className='flexDireita'>
+                                        <button className='button'>Comentar</button>
+                                    </div>
+                                ) : 
+                                null
+                                }
                             </div>
-                            }
-                        </div>
+                        </Link>
+                        <Button className={style.avanti} id='btAvanti' onClick={botaoAvanti} icone={IconLike} value='AVANTI' margin='20' color='rgb(3, 70, 49)' paddingHorizontal={22} paddingVertical={10} bg='#FFF' />
+                        
                     </article>
-            </Link>
             )
         
     }

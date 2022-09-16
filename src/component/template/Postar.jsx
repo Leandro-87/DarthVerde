@@ -114,7 +114,7 @@ export default function Postar(props){
                             onChange={(e) => setInput(e.target.value)}
                         />
                         <div style={{display:'flex', justifyContent: 'flex-end'}}>
-                            <Button value='Postar' type='submit' id='submitPost' margin='0' icone={IconPostar} />
+                            <Button value='Postar' type='submit' id='submitPost' margin='0' padding='10' icone={IconPostar} />
                         </div>
                         {/*<button type='submit' id='submitPost' /*onClick={btnEnviaPost} //\\ >Postar</button> */}
                         
