@@ -9,9 +9,8 @@ export default function Comentario(){
         <>
             {pathname == '/post/[postagem]' ? (
                 <div className="mv2">
-                    <div className="mr4">avatar | nome do cabra</div>
                     <p>
-                        Comentario
+                        Comentarios...
                     </p>
                 </div>
                 

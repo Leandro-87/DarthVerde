@@ -2,7 +2,7 @@ import style from './css/Post.module.css'
 import Link from 'next/link'
 import Comentario from './Comentario'
 import { useRouter } from 'next/router'
-import { IconLike } from '../icons'
+import { IconComent, IconLike } from '../icons'
 import Button from './Button'
 import { useState } from 'react'
 
@@ -16,6 +16,10 @@ export default function PostBox(props){
     function botaoAvanti(){
         setAvanti(+1)
        
+    }
+
+    function comentario(){
+        alert('teste botao comentario')
     }
 
     function cardPost(tamanhoFont){
@@ -35,14 +39,16 @@ export default function PostBox(props){
                                 <Comentario/>
                                 {pathname == '/post/[postagem]' ? (
                                     <div className='flexDireita'>
-                                        <button className='button'>Comentar</button>
+                                         <Button onClick={comentario} value='Comentar' type='submit' id='comentar' margin='0' padding='10' icone={IconComent} />
                                     </div>
                                 ) : 
                                 null
                                 }
                             </div>
                         </Link>
-                        <Button className={style.avanti} id='btAvanti' onClick={botaoAvanti} icone={IconLike} value='AVANTI' margin='20' color='rgb(3, 70, 49)' paddingHorizontal={22} paddingVertical={10} bg='#FFF' />
+                        <Button className={style.avanti} id='btAvanti' onClick={botaoAvanti}
+                                icone={IconLike} value='AVANTI' margin='20' color='rgb(3, 70, 49)'
+                                paddingHorizontal={22} paddingVertical={15} bg='#FFF' shadow='none' />
                         
                     </article>
             )

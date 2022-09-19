@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import style from './css/Postar.module.css'
-import Link from 'next/link'
 
 import firebase from '../../services/firebaseConnection'
 import useAuth from '../data/hook/useAuth'
@@ -11,8 +10,8 @@ import Button from './Button'
 
 export default function Postar(props){
 
-    const [tituloInput, setTituloInput] = useState('')
-    const [input, setInput] = useState('')
+    const [titulo, setTitulo] = useState('')
+    const [mensagem, setMensagem] = useState('')
     const [timeline, setTimeline] = useState([])
 
     const {usuario} = useAuth()
@@ -29,7 +28,7 @@ export default function Postar(props){
 
     async function addPost(e){
         e.preventDefault()
-        if(input === '' || tituloInput === ''){
+        if(mensagem === '' || titulo === ''){
             alert('A mensagem ou título não pode ser vazio!')
             return;
         } 
@@ -38,8 +37,8 @@ export default function Postar(props){
         const doc = await firebase.firestore().collection('posts')
         .add({
             created: new Date(),
-            titulo: tituloInput,
-            mensagem: input,
+            titulo: titulo,
+            mensagem: mensagem,
             userImg: usuario.imagemUrl,
             userName: usuario.nome,
             userId: usuario.uid
@@ -48,51 +47,17 @@ export default function Postar(props){
             id: doc.id,
             created: new Date(),
             createdFormated: new Date().toLocaleDateString('pt-BR'),
-            titulo: tituloInput,
-            mensagem: input,
+            titulo: titulo,
+            mensagem: mensagem,
             userId: usuario.uid,
             userName: usuario.nome
         };
         setTimeline([...timeline, data]);
-        setInput('')
-        setTituloInput('')
+        setMensagem('')
+        setTitulo('')
 
-        // Ta chamando duas vezes, voce vai ver quando cadastrar um post, o correto é voce passar o CSS do index pra cá e manter tudo aqui
-        firebase.firestore().collection('posts').orderBy('created', 'desc').onSnapshot((snapshot)=>{
-            let lista = [];
-            snapshot.forEach((doc)=>{
-                lista.push({
-                    id: doc.id,
-                    created: doc.data().created,
-                    createdFormated: new Date().toLocaleDateString('pt-BR'),
-                    titulo: doc.data().titulo,
-                    mensagem: doc.data().mensagem,
-                    userId: doc.data().userId,
-                    userName: doc.data().userName
-                })
-            })
-            setTimeline(lista)
-        })
-    }
-
-        /*   -------------------------------AQUI ERA PRA FUNCIONAR O FEED COM TODAS AS MENSAGENS ENVIADAS MAS NAO VAI ----------------------------------- */ 
-
-        // const feed = firebase.firestore().collection('posts').orderBy('created', 'asc' ).get(); 
-        
-        /*
-
-           --------------------------------------- ESTE BLOCO A BAIXO ERA PRA MOSTRAR AS POSTAGENS QUE ESTÃO NO BANCO -----------------------------------
-                                                                mas da erro se descomentar, pode ver
-
-        const data = JSON.stringify(feed.docs.map( u => {
-            return {
-                id: u.id,
-                createdFormated: format(u.data().created.toDate(), 'dd MMMM yyyy'),
-                ...u.data(),
-            }
-        }))*/
-       
-    
+     
+    }   
         
     return (
         <>
@@ -106,12 +71,12 @@ export default function Postar(props){
                 <div id='areaPostar' className={style.formPost} style={{display:'none'}}>
                     <form id='enviaPost' onSubmit={addPost}>
                         <input type="text" name='tituloMensagem' className={style.inputArea} id='tituloMensagem' placeholder='Título da sua mensagem'
-                            value={tituloInput}
-                            onChange={(e) => setTituloInput(e.target.value)}
+                            value={titulo}
+                            onChange={(e) => setTitulo(e.target.value)}
                         />
                         <textarea name="mensagem" id="mensagem" className={style.inputArea} placeholder='Sua mensagem para o verdão' cols="30" rows="10"
-                            value={input} 
-                            onChange={(e) => setInput(e.target.value)}
+                            value={mensagem} 
+                            onChange={(e) => setMensagem(e.target.value)}
                         />
                         <div style={{display:'flex', justifyContent: 'flex-end'}}>
                             <Button value='Postar' type='submit' id='submitPost' margin='0' padding='10' icone={IconPostar} />

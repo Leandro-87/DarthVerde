@@ -1,15 +1,15 @@
-import ForcarAutenticacao from "../component/auth/ForcarAutenticacao"
-import Layout from "../component/template/Layout"
-import { useEffect , useState } from "react"
-import PostBox from '../component/template/PostBox'
-import firebase from '../services/firebaseConnection'
 import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import Layout from "../../component/template/Layout"
+import PostBox from '../../component/template/PostBox'
+import firebase from '../../services/firebaseConnection'
 
-export default function Perfil(){
+export default function Post(){
 
   const [posts, setPosts] = useState([])
   const router = useRouter()
-  
+  const idPost = router.query.postagem
+
   useEffect(() => {
     firebase.firestore().collection('posts').onSnapshot((snapshot)=>{
         let lista = [];
@@ -27,27 +27,25 @@ export default function Perfil(){
             })
         })
         setPosts(lista)
-        //console.log(lista)
+
     })
 },[router])
-
-return (
-  <ForcarAutenticacao>
   
-    <Layout title='Perfil do usuario'>
+  return (
+    <Layout title={idPost}>
 
-          
-        {posts.map((post, index)=>{
-            return(
-                <PostBox mid userImage={post.userImg} userName={post.userName} key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
-
-            )
-        })}
-
+     
+        
+      {posts.map((post, index)=>{
+        if(post.id == idPost){  
+          return(
+            <PostBox mid userImage={post.userImg} userName={post.userName} key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`post/`[post.id]}/>
+          )
+        }
+      })}
         
 
-      
-      </Layout>
-    </ForcarAutenticacao>
+        
+    </Layout>
   )
 }
