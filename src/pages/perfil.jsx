@@ -3,18 +3,18 @@ import Layout from "../component/template/Layout"
 import { useEffect , useState } from "react"
 import PostBox from '../component/template/PostBox'
 import firebase from '../services/firebaseConnection'
-import { useRouter } from "next/router"
+import useAuth from "../component/data/hook/useAuth"
 
 export default function Perfil(){
 
   const [posts, setPosts] = useState([])
-  const router = useRouter()
+  const {usuario} = useAuth()
+  
   
   useEffect(() => {
-    firebase.firestore().collection('posts').onSnapshot((snapshot)=>{
-        let lista = [];
-        //console.log(snapshot, 'oooooo');
-        snapshot.forEach((doc)=>{
+    firebase.firestore().collection('posts').where('userId', '==', `${usuario?.uid}`).get().then(snapshot => {
+      let lista = [];
+        snapshot.docs.forEach(doc =>{
             lista.push({
                 id: doc.id,
                 created: doc.data().created,
@@ -29,25 +29,27 @@ export default function Perfil(){
         setPosts(lista)
         //console.log(lista)
     })
-},[router])
+},[usuario])
 
 return (
   <ForcarAutenticacao>
   
     <Layout title='Perfil do usuario'>
 
-          
-        {posts.map((post, index)=>{
-            return(
-                <PostBox mid userImage={post.userImg} userName={post.userName} key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
+      <p><img src={usuario?.imagemUrl} alt={usuario?.imagemUrl} title={`Usuário: ${usuario?.nome}`} /> </p>
+      <p>{usuario?.nome}</p>
+      <p>{usuario?.email}</p>
+      <p>{usuario?.provedor}</p>
+      <br />
 
-            )
-        })}
+      <h2>Suas postagens:</h2>
+      {posts.map((post, index)=>{
+        return(
+          <PostBox mid userImage={post.userImg} userName={post.userName} key={index} post={post} tituloMensagem={post.titulo} mensagem={post.mensagem} url={`/post/${post.id}`}/>
+        )
+      })}
 
-        
-
-      
-      </Layout>
+    </Layout>
     </ForcarAutenticacao>
   )
 }

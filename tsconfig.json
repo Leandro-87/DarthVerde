@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/component/template/aside/index.jsx", "src/pages/post/[postagem].jsx"  ],
+, "src/component/template/aside/index.jsx", "src/pages/post/[postagem].jsx", "src/pages/perfil.jsx"  ],
   "exclude": [
     "node_modules"
   ]

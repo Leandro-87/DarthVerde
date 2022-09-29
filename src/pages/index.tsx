@@ -3,7 +3,7 @@ import Postar from '../component/template/Postar'
 import Timeline from "../component/template/Timeline"
 
 
-export default function Home(props){
+export default function Home(){
   return (
     <Layout title='Darth Verde é Palmeiras!'>
         <Postar/>

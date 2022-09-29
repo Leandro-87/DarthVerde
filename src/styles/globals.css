@@ -13,5 +13,5 @@ body {min-height:100vh; background: rgb(255,255,255); background: linear-gradien
 a { color: inherit; text-decoration: none;
 }
 
-* {box-sizing: border-box;}
+* {box-sizing: border-box; transition: all 200ms;}
 

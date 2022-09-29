@@ -15,11 +15,26 @@ export default function PostBox(props){
 
     function botaoAvanti(){
         setAvanti(+1)
+        /*
+        const localAvanti = JSON.parse(localStorage.getItem('@avanti'))
+        if(localAvanti == null){
+            localStorage.setItem('@avanti', '[]');
+        } else {
+            localAvanti.push(setAvanti(+1));
+            localStorage.setItem('@avanti', JSON.stringify(localAvanti))
+        }
+
+        */
+        
+
+        
+
        
     }
 
     function comentario(){
-        alert('teste botao comentario')
+       alert('comentario')
+       
     }
 
     function cardPost(tamanhoFont){
@@ -48,7 +63,7 @@ export default function PostBox(props){
                         </Link>
                         <Button className={style.avanti} id='btAvanti' onClick={botaoAvanti}
                                 icone={IconLike} value='AVANTI' margin='20' color='rgb(3, 70, 49)'
-                                paddingHorizontal={22} paddingVertical={15} bg='#FFF' shadow='none' />
+                                paddingHorizontal={22} paddingVertical={15} bg='#FFF' shadow=' ' />
                         
                     </article>
             )

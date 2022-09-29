@@ -10,10 +10,12 @@ export default function Post(){
   const router = useRouter()
   const idPost = router.query.postagem
 
+
+  //console.log(router)
   useEffect(() => {
     firebase.firestore().collection('posts').onSnapshot((snapshot)=>{
         let lista = [];
-        //console.log(snapshot, 'oooooo');
+        //console.log(snapshot);
         snapshot.forEach((doc)=>{
             lista.push({
                 id: doc.id,
@@ -27,6 +29,7 @@ export default function Post(){
             })
         })
         setPosts(lista)
+       // console.log(lista)
 
     })
 },[router])
@@ -43,6 +46,7 @@ export default function Post(){
           )
         }
       })}
+     
         
 
         
