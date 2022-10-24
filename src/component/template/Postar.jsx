@@ -26,14 +26,19 @@ export default function Postar(props){
          
     }
 
+    const rep = mensagem == 'palmeiras nao tem mundial' || mensagem == 'teste'
+
     async function addPost(e){
         e.preventDefault()
         if(mensagem === '' || titulo === ''){
             alert('A mensagem ou título não pode ser vazio!')
             return;
         } 
-        
-        
+        if(mensagem == rep){
+            alert('Sai fora OTÁRIO!')
+            return;
+        } 
+                
         const doc = await firebase.firestore().collection('posts')
         .add({
             created: new Date(),
